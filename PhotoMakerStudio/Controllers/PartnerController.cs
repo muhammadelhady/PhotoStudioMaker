@@ -29,6 +29,9 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("DeletePartner")]
         public async Task<IActionResult>DeletePartner(DeletePartnerDto deletePartnerDto)
         {
+            if (deletePartnerDto == null)
+                return BadRequest("data object is empty");
+
             if (await _partnerRepo.DeletePartner(deletePartnerDto))
                 return Ok("Deleted");
             return BadRequest();
@@ -39,6 +42,8 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("AddNewPartner")]
         public async Task<IActionResult> AddNewPartner([FromForm]PartnerDto partnerDto)
         {
+            if (partnerDto == null)
+                return BadRequest("data object is empty");
 
             if (partnerDto == null)
                 return BadRequest();

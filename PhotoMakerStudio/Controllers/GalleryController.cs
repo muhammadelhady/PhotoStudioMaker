@@ -34,6 +34,8 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> Register([FromForm] PhotoUploadDto photoUploadDto)
         {
+            if (photoUploadDto == null)
+                return BadRequest("data object is empty");
             if (await _photoRepo.SavePhoto(photoUploadDto)!=null)
                 return StatusCode(201);
             return BadRequest();
@@ -43,6 +45,8 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("DeletePhoto")]
         public async Task<IActionResult> DeletePhoto([FromBody]DeletePhotoDto deletePhotoDto)
         {
+            if (deletePhotoDto == null)
+                return BadRequest("data object is empty");
             if (await _photoRepo.DeletePhtoo(deletePhotoDto))
                 return Ok("Deleted");
             return BadRequest();

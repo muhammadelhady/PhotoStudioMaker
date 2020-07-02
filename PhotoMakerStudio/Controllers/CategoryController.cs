@@ -23,6 +23,9 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("NewCategory")]
         public async Task<IActionResult> AddNewCategory([FromBody]CategoryDto categoryDto)
         {
+            if (categoryDto == null)
+                return BadRequest("data object is empty");
+
             if (await _categoryRepo.GetCategory(categoryDto.CategoryName) != null)
                 return BadRequest("this category is already exist");
 
@@ -39,6 +42,9 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("DeleteCategory")]
         public async Task<IActionResult> DeleteCategory([FromBody] CategoryDto categoryDto)
         {
+            if (categoryDto == null)
+                return BadRequest("data object is empty");
+
             if (await _categoryRepo.DeleteCategory(categoryDto.CategoryName))
                 return Ok("Category Deleted");
             return BadRequest();

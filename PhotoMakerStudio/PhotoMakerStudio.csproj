@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\" />
     <Folder Include="wwwroot\Gallery\" />
     <Folder Include="wwwroot\PartnerLogos\" />
   </ItemGroup>
@@ -67,3 +68,4 @@
   </Target>
 
 </Project>
+    

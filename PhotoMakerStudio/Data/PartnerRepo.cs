@@ -50,6 +50,7 @@ namespace PhotoMakerStudio.Data.Interfaces
 
         public async Task<bool> DeletePartner(DeletePartnerDto deletePartnerDto)
         {
+          
             Partner partner = await _dataContext.Partners.FirstOrDefaultAsync(x => x.PartnerId == deletePartnerDto.PartnerID);
 
             if (File.Exists(partner.LogoLocation))

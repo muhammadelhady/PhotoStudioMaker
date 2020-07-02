@@ -32,6 +32,8 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
+            if (userForRegisterDto == null)
+                return BadRequest("data object is empty");
 
             userForRegisterDto.Name = userForRegisterDto.Name.ToLower();
 
@@ -51,6 +53,9 @@ namespace PhotoMakerStudio.Controllers
         [HttpPost("login")]
         public async Task <IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
+            if (userForLoginDto == null)
+                return BadRequest("data object is empty");
+
             var userFromRepo = await _repo.Login(userForLoginDto.Name, userForLoginDto.Password);
             if ( userFromRepo == null)
             {

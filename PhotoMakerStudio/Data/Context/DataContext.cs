@@ -19,6 +19,8 @@ namespace PhotoMakerStudio.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<GalleryPhoto> Gallery { get; set; }
         public DbSet<Partner> Partners { get; set; }
+        public DbSet<PhotoTypes> PhotoTypes { get; set; }
+        public DbSet<BackgroundTypes> BackgroundTypes { get; set; }
 
 
     }

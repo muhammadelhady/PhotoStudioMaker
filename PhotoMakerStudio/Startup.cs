@@ -38,6 +38,8 @@ namespace PhotoMakerStudio
             services.AddScoped<IPhotoRepo, PhotoRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<IPartnerRepo, PartnerRepo>();
+            services.AddScoped<IPhotoBackgroundRepo, PhotoBackroundRepo>();
+            services.AddScoped<IPhotoTypesRepo, PhotoTypesRepo>();
             services.AddAuthentication(x=> {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

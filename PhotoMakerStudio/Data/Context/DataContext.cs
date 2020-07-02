@@ -22,6 +22,8 @@ namespace PhotoMakerStudio.Data
         public DbSet<PhotoTypes> PhotoTypes { get; set; }
         public DbSet<BackgroundTypes> BackgroundTypes { get; set; }
 
+        public DbSet<ContactRequest> ContactRequests { get; set; }
+
 
     }
 }

@@ -40,6 +40,7 @@ namespace PhotoMakerStudio
             services.AddScoped<IPartnerRepo, PartnerRepo>();
             services.AddScoped<IPhotoBackgroundRepo, PhotoBackroundRepo>();
             services.AddScoped<IPhotoTypesRepo, PhotoTypesRepo>();
+            services.AddScoped<IContactRequestRepo, ContactRequestRepo>();
             services.AddAuthentication(x=> {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

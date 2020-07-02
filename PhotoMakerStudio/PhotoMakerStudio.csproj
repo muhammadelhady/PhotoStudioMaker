@@ -36,6 +36,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\" />
     <Folder Include="wwwroot\Gallery\" />
+    <Folder Include="wwwroot\ContactRequestsFiles\" />
     <Folder Include="wwwroot\PartnerLogos\" />
   </ItemGroup>
 

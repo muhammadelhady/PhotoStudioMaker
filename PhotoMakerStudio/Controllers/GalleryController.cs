@@ -57,5 +57,23 @@ namespace PhotoMakerStudio.Controllers
         {
            return await _photoRepo.GetAllPhotos();
         }
+
+
+       [HttpGet("CategoriesCover")]
+       public async Task<List<GalleryPhoto>>GetCategoriesCover()
+        {
+          return await  _photoRepo.GetCategoriesCover();
+        }
+
+
+        [HttpPost("CategoryPhotos")]
+        public async Task<List<GalleryPhoto>>GetCategoryPhotos([FromBody] CategoryIdDto categoryIdDto )
+        {
+
+            if (categoryIdDto == null)
+                return new List<GalleryPhoto>();
+            return await _photoRepo.GetCategoryPhotos(categoryIdDto);
+         
+        }
     }
 }

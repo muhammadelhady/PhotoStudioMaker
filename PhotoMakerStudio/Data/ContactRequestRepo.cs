@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using PhotoMakerStudio.Data.Interfaces;
@@ -22,18 +23,22 @@ namespace PhotoMakerStudio.Data
             _dataContext = dataContext;
            _environment = environment;
         }
-        public async Task<ContactRequest> AddNewContactRequest(ContactRequestDto contactRequestDto )
+        public async Task<ContactRequest> AddNewContactRequest([FromForm]ContactRequestDto contactRequestDto )
         {
             var uploads = Path.Combine(_environment.WebRootPath, "ContactRequestsFiles");
-            if (contactRequestDto.AttachedFile.Length <= 0)
-                return new ContactRequest();
-
-            string newAttachedFileName = DateTime.UtcNow.Ticks.ToString();
-            var filePath = Path.Combine(uploads, newAttachedFileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await contactRequestDto.AttachedFile.CopyToAsync(fileStream);
+            string filePath="";
+            if (contactRequestDto.AttachedFile!=null) {
+                string newAttachedFileName = DateTime.UtcNow.Ticks.ToString();
+                 filePath = Path.Combine(uploads, newAttachedFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await contactRequestDto.AttachedFile.CopyToAsync(fileStream);
+                }
             }
+
+           if (filePath=="")
+                filePath = "no file attached";
+            
 
             ContactRequest request = new ContactRequest
             {

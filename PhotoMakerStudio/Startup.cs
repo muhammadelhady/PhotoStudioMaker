@@ -97,7 +97,7 @@ namespace PhotoMakerStudio
 
 
             app.UseRouting();
-            app.UseCors(X => X.WithOrigins("https://localhost:44353").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(X => X.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

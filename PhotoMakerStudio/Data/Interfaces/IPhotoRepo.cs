@@ -13,6 +13,8 @@ namespace PhotoMakerStudio.Data
         public Task<bool> DeletePhtoo(DeletePhotoDto deletePhotoDto);
 
         public Task<List<GalleryPhoto>> GetAllPhotos();
+        public Task<List<GalleryPhoto>> GetCategoriesCover();
+        public Task<List<GalleryPhoto>> GetCategoryPhotos(CategoryIdDto categoryIdDto);
       
 
     }

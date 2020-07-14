@@ -18,6 +18,7 @@ namespace PhotoMakerStudio.Data
         private readonly IWebHostEnvironment _environment;
         private readonly ICategoryRepo _categoryRepo;
 
+
         public PhotoRepo(DataContext dataContext, IWebHostEnvironment environment, ICategoryRepo categoryRepo)
         {
             _dataContext = dataContext;
@@ -44,6 +45,22 @@ namespace PhotoMakerStudio.Data
         public async Task<List<GalleryPhoto>> GetAllPhotos()
         {
             return await _dataContext.Gallery.ToListAsync();
+        }
+
+        public async Task<List<GalleryPhoto>> GetCategoriesCover()
+        {
+
+            List<GalleryPhoto> coverPhotos = new List<GalleryPhoto>();
+            List<Category> categories =await _dataContext.Category.ToListAsync();
+            for (int i = 0; i < categories.Count;i++ )
+                coverPhotos.Add(await _dataContext.Gallery.FirstOrDefaultAsync(x => x.CategoryFK == categories[i].CategoryId));
+            return coverPhotos;
+            }
+
+        public async Task<List<GalleryPhoto>> GetCategoryPhotos(CategoryIdDto categoryIdDto)
+        {
+
+            return await _dataContext.Gallery.Where(x => x.CategoryFK == categoryIdDto.CategoryId).ToListAsync();
         }
 
         public async Task<GalleryPhoto> SavePhoto(PhotoUploadDto photoUploadDto)

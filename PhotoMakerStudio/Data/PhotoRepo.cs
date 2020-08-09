@@ -25,7 +25,14 @@ namespace PhotoMakerStudio.Data
             _environment = environment;
             _categoryRepo = categoryRepo;
         }
-       
+
+        public async Task<bool> DeleteCatgoryPhotos(CategoryDto categoryDto)
+        {
+            var photos = await _dataContext.Gallery.Where(x => x.Category.CategoryName == categoryDto.CategoryName).ToListAsync();
+            _dataContext.RemoveRange(photos);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
 
         public async Task<bool> DeletePhtoo(DeletePhotoDto deletePhotoDto)
         {
@@ -63,11 +70,16 @@ namespace PhotoMakerStudio.Data
             return await _dataContext.Gallery.Where(x => x.CategoryFK == categoryIdDto.CategoryId).ToListAsync();
         }
 
+        public async Task<List<GalleryPhoto>> GetCategoryPhotosName(CategoryDto categoryDto)
+        {
+            return await _dataContext.Gallery.Where(x => x.Category.CategoryName == categoryDto.CategoryName).ToListAsync();
+        }
+
         public async Task<GalleryPhoto> SavePhoto(PhotoUploadDto photoUploadDto)
         {
 
             var uploads = Path.Combine(_environment.WebRootPath, "Gallery");
-            if (photoUploadDto.PhotoFile.Length <= 0)
+            if (photoUploadDto.PhotoFile==null)
                 return new GalleryPhoto();
 
             string newPhotoName = DateTime.UtcNow.Ticks.ToString();

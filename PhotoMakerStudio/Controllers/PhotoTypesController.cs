@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMakerStudio.Data.Interfaces;
 using PhotoMakerStudio.DTO;
@@ -26,7 +27,7 @@ namespace PhotoMakerStudio.Controllers
         {
             return await _photoTypesRepo.GetAllPhotoTypes();
         }
-
+        [Authorize]
         [HttpPost("DeletePhotoType")]
         public async Task<IActionResult>DeletePhotoTybe([FromBody]PhotoTypesDto photoTypesDto)
         {
@@ -37,7 +38,7 @@ namespace PhotoMakerStudio.Controllers
             return BadRequest();
         }
 
-
+        [Authorize]
         [HttpPost("AddNewPhotoType")]
         public async Task<IActionResult>AddNewPhotoType([FromBody] PhotoTypesDto photoTypesDto )
         {

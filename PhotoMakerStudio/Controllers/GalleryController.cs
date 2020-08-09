@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMakerStudio.Data;
@@ -29,8 +30,8 @@ namespace PhotoMakerStudio.Controllers
         }
 
 
-      
 
+        [Authorize]
         [HttpPost("upload")]
         public async Task<IActionResult> Register([FromForm] PhotoUploadDto photoUploadDto)
         {
@@ -41,13 +42,21 @@ namespace PhotoMakerStudio.Controllers
             return BadRequest();
         }
 
-
+        [Authorize]
         [HttpPost("DeletePhoto")]
         public async Task<IActionResult> DeletePhoto([FromBody]DeletePhotoDto deletePhotoDto)
         {
-            if (deletePhotoDto == null)
-                return BadRequest("data object is empty");
+            
             if (await _photoRepo.DeletePhtoo(deletePhotoDto))
+                return Ok("Deleted");
+            return BadRequest();
+        }
+        [Authorize]
+        [HttpPost("DeleteCategoryPhotos")]
+        public async Task<IActionResult> DeleteCategoryPhotos([FromBody] CategoryDto categoryDto)
+        {
+          
+            if (await _photoRepo.DeleteCatgoryPhotos(categoryDto))
                 return Ok("Deleted");
             return BadRequest();
         }
@@ -67,13 +76,23 @@ namespace PhotoMakerStudio.Controllers
 
 
         [HttpPost("CategoryPhotos")]
-        public async Task<List<GalleryPhoto>>GetCategoryPhotos([FromBody] CategoryIdDto categoryIdDto )
+        public async Task<List<GalleryPhoto>>GetCategoryPhotosId([FromBody] CategoryIdDto categoryIdDto )
         {
 
             if (categoryIdDto == null)
                 return new List<GalleryPhoto>();
             return await _photoRepo.GetCategoryPhotos(categoryIdDto);
          
+        }
+
+        [HttpPost("CategoryPhotosName")]
+        public async Task<List<GalleryPhoto>> GetCategoryPhotosName([FromBody] CategoryDto categoryDto)
+        {
+
+            if (categoryDto == null)
+                return new List<GalleryPhoto>();
+            return await _photoRepo.GetCategoryPhotosName(categoryDto);
+
         }
     }
 }

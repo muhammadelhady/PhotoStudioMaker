@@ -38,7 +38,8 @@ namespace PhotoMakerStudio.Data
 
             Category category = await _dataContext.Category.Where(x => x.CategoryName == categoryName).FirstOrDefaultAsync();
             _dataContext.Category.Remove(category);
-            if (await _dataContext.SaveChangesAsync() > 0)
+          
+            if (await _dataContext.SaveChangesAsync() > 0 )
                 return true;
 
             return false;

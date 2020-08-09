@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMakerStudio.Data.Interfaces;
 using PhotoMakerStudio.DTO;
@@ -25,7 +26,7 @@ namespace PhotoMakerStudio.Controllers
         {
             return await _partnerRepo.GetPartners();
         }
-
+        [Authorize]
         [HttpPost("DeletePartner")]
         public async Task<IActionResult>DeletePartner(DeletePartnerDto deletePartnerDto)
         {
@@ -38,7 +39,7 @@ namespace PhotoMakerStudio.Controllers
                
         }
 
-
+        [Authorize]
         [HttpPost("AddNewPartner")]
         public async Task<IActionResult> AddNewPartner([FromForm]PartnerDto partnerDto)
         {

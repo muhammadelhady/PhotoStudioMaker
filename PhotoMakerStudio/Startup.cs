@@ -30,7 +30,7 @@ namespace PhotoMakerStudio
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(X => X.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddHttpClient();
             services.AddControllersWithViews();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddCors();

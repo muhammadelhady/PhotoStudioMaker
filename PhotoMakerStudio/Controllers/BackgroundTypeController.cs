@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMakerStudio.Data.Interfaces;
 using PhotoMakerStudio.DTO;
@@ -20,13 +21,13 @@ namespace PhotoMakerStudio.Controllers
         {
             _backgroundRepo = backgroundRepo;
         }
-
+        
         [HttpGet("GetAllBackgroundTypes")]
         public async Task <List<BackgroundTypes>> GetAllBackgroundTypes()
         {
             return await _backgroundRepo.GetAllBackgroundTypes();
         }
-
+        [Authorize]
         [HttpPost("DeleteBackgroundType")]
         public async Task<IActionResult>DeleteBackgroundType([FromBody]BackgroundTypeDto backgroundTypeDto)
         {
@@ -37,7 +38,7 @@ namespace PhotoMakerStudio.Controllers
                 return Ok("Deleted");
             return BadRequest();
         }
-
+        [Authorize]
         [HttpPost("AddNewBackgroundType")]
         public async Task <IActionResult>AddNewBackgroundType([FromBody]BackgroundTypeDto backgroundTypeDto)
         {

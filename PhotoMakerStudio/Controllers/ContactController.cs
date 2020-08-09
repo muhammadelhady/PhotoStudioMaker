@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMakerStudio.Data;
 using PhotoMakerStudio.Data.Interfaces;
@@ -21,7 +22,7 @@ namespace PhotoMakerStudio.Controllers
             _contactRequestRepo = contactRequestRepo;
         }
 
-
+        [Authorize]
         [HttpGet("GetAllRequests")]
         public async Task<List<ContactRequest>>GetAllRequests()
         {
@@ -38,7 +39,7 @@ namespace PhotoMakerStudio.Controllers
                 return StatusCode(201);
             return BadRequest();
         }
-
+        [Authorize]
         [HttpPost("DeleteRequest")]
         public async Task<IActionResult>DeleteRequest(DeleteContactRequestDto deleteRequestDto)
         {

@@ -11,11 +11,12 @@ namespace PhotoMakerStudio.Data
     {
         public Task<GalleryPhoto> SavePhoto(PhotoUploadDto photoUploadDto);
         public Task<bool> DeletePhtoo(DeletePhotoDto deletePhotoDto);
-
+        public Task<bool> DeleteCatgoryPhotos (CategoryDto categoryDto);
         public Task<List<GalleryPhoto>> GetAllPhotos();
         public Task<List<GalleryPhoto>> GetCategoriesCover();
         public Task<List<GalleryPhoto>> GetCategoryPhotos(CategoryIdDto categoryIdDto);
-      
+        public Task<List<GalleryPhoto>> GetCategoryPhotosName(CategoryDto categoryDto);
+
 
     }
 }
